@@ -1,0 +1,6 @@
+Alias text: ^track +gold$
+Matching type: Regular expression
+Whole words only: yes
+Match case: yes
+
+golden_touch.track_gold();

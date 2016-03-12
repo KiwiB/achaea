@@ -1,0 +1,35 @@
+// Tracks the contents of the rift.
+//
+// REQUIRES:
+// Tracking gmcp
+//
+// API:
+// tracking_rift.check_rift(ITEM)
+//     Returns: amount of ITEM in player's rift
+//     Example of checking amount of bisemutum:
+//         tracking_rift.check_rift("bisemutum");
+
+client.tracking_rift = (function () {
+    "use strict";
+
+    let rift = {};
+
+    tracking_gmcp.subscribe("IRE.Rift.Change", function (gmcp_args) {
+        rift[gmcp_args.desc] = parseInt(gmcp_args.amount, 10);
+    });
+
+    tracking_gmcp.subscribe("IRE.Rift.List", function (gmcp_args) {
+        rift = {};
+        gmcp_args.forEach(function (item) {
+            rift[item.desc] = parseInt(item.amount, 10);
+        });
+    });
+
+    const check_rift = (item) => rift[item] || 0;
+
+    client.send_GMCP("IRE.Rift.Request", "");
+
+    return Object.freeze({
+        check_rift
+    });
+}());

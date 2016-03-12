@@ -1,0 +1,129 @@
+// Keeps your pack worn and your gold inside it and adds aliases for dealing with gold and shopping.
+//
+// REQUIRES:
+// Display notice patch
+// Tracking gmcp
+//
+// SETUP:
+// Set pack_number below to the ID number of the container for your gold (make sure to keep it up to date if you change packs)
+//
+// ALIASES:
+// gg
+//     Picks up gold off the ground (and automatically puts it in your pack).
+// shop for ITEM1 ITEM2...
+//     Automatically checks wares for ITEM1, ITEM2, etc. when you enter a shop.
+// shop
+//     Toggles shopping on and off.
+// spend AMOUNT (gold) on ACTION
+//     Gets AMOUNT gold from your pack and does ACTION (then automatically puts remaining gold in your pack).
+//     NOTE: If you're too lazy to look at the exact price, just make sure AMOUNT is larger than what what is needed for ACTION. Any unspend gold will automatically be put back in your pack.
+// track gold
+//     Toggles keeping a running total of gold picked up off the ground.
+//     NOTE: Toggling resets the total.
+//
+// API:
+// golden_touch.get_gold()
+// golden_touch.shop_for(ITEMS)
+//     NOTE: ITEMS is a string of items separated by spaces
+// golden_touch.spend_gold(AMOUNT, ACTION)
+// golden_touch.toggle_shopping()
+// golden_touch.track_gold()
+
+client.golden_touch = (function () {
+    "use strict";
+
+    const got_gold_trigger = reflex_find_by_name("trigger", "Got Gold", true, false, "Golden touch");
+    reflex_disable(got_gold_trigger);
+
+    const pack_number = "179945"; // SET THIS TO YOUR PACK'S IN-GAME ID NUMBER
+    let shopping = false;
+    let shopping_for = [];
+    let tracked_gold = 0;
+
+    tracking_gmcp.subscribe("Char.Items.Add", function (gmcp_args) {
+        if (gmcp_args.location === "inv" && gmcp_args.item.name === "some gold sovereigns") {
+            send_command("put sovereigns in " + pack_number, true);
+            send_command("put sovereigns in " + pack_number, true);
+        }
+    });
+
+    tracking_gmcp.subscribe("Char.Items.Update", function (gmcp_args) {
+        if (gmcp_args.item.id === pack_number && gmcp_args.item.attrib === "Wc") {
+            send_command("wear " + pack_number, true);
+            send_command("wear " + pack_number, true);
+        }
+    });
+    
+    tracking_gmcp.subscribe("Room.Info", function (gmcp_args) {
+        if (shopping && gmcp_args.details.indexOf("shop") !== -1) {
+            shopping_for.forEach(function (item) {
+                send_command("wares " + item, true);
+            });
+        }
+    });
+
+    const get_gold = function () {
+        send_command("take sovereigns", true);
+    };
+
+    const got_gold = function (quantity) {
+        quantity = quantity || 1;
+        tracked_gold += parseInt(quantity, 10);
+        display_notice("Gold Earned: ", "gold", "", tracked_gold.toString(), "lime");
+    };
+
+    const spend_gold = function (quantity, action) {
+        send_command("get " + quantity + " sovereigns from " + pack_number, true);
+        send_command(action, true);
+    };
+
+    const start_shopping = function () {
+        if (shopping_for.length === 0) {
+            display_notice("What do you want to shop for?", "red");
+        } else {
+            shopping = true;
+            display_notice("Started", "lime", "", " Shopping for: ", "reset", "", shopping_for.join(", "), "lime");
+        }
+    };
+
+    const shop_for = function (items) {
+        shopping_for = items.split(" ");
+        start_shopping();
+    };
+
+    const stop_shopping = function () {
+        shopping = false;
+        display_notice("Stopped", "red", "", " Shopping", "reset");
+    };
+    
+    const toggle_shopping = function () {
+        if (shopping) {
+            stop_shopping();
+        } else {
+            start_shopping();
+        }
+    };
+
+    const track_gold = function () {
+        if (got_gold_trigger.enabled) {
+            reflex_disable(got_gold_trigger);
+            display_notice("Stopped", "red", "", " Tracking Gold\nGold Earned: ", "", "", tracked_gold.toString(), "lime");
+        } else {
+            tracked_gold = 0;
+            reflex_enable(got_gold_trigger);
+            display_notice("Started", "lime", "", " Tracking Gold", "reset");
+        }
+    };
+
+    send_command("wear " + pack_number, true);
+    send_command("put sovereigns in " + pack_number, true);
+
+    return Object.freeze({
+        get_gold,
+        got_gold,
+        shop_for,
+        spend_gold,
+        toggle_shopping,
+        track_gold
+    });
+}());

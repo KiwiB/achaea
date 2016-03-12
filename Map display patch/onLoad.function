@@ -1,0 +1,73 @@
+// Changes player marker from flag to room outline and replaces exit text with area name.
+
+(function () {
+    "use strict";
+
+    // Monkey patch Map_init to replace the flag player-marker with an outline around the current room
+    if (!Map.init_old) {
+        Map.init_old = Map.init;
+        Map.init = function (...args) {
+            Map.init_old.apply(Map, args);
+            $("#marker_char_current").css('background-image', 'none').css('outline', 'medium solid chartreuse ');
+        };
+    }
+}());
+
+// Overwrites Map.draw_player to align the new current-room-outline and center the map correctly
+Map.draw_player = function () {
+    if (!client.map_enabled()) {
+        return;
+    }
+    $("#s_room_name, #map_room_name").html(Map.roomName);
+    Map.draw_exits_string();
+    if (Map.overhead_mode()) {
+        Map.center_overhead();
+        return;
+    }
+    var room = (Map.cID == null) ? null : Map.map_rooms[Map.cID];
+    if (room && ((room.z != Map.cZ) || (room.b != Map.cB))) {
+        room = null;
+    }
+    if (room == null) {
+        $("#marker_char_current").css('display', 'none');
+        Map.center_map($("#marker_map_center"));
+        return;
+    }
+    room = Map.map_rooms[Map.cID];
+    var width = room.important ? 22 : 16;
+    width = Math.ceil(width * Map.zoom / 10);
+    var loc = Map.square_location(room.x, room.y);
+    var xpos = loc.x - width / 2;
+    var ypos = loc.y - width / 2;
+    $("#marker_char_current").css('display', 'block').css('width', width + 'px').css('height', width + 'px').css('left', xpos + 'px').css('top', ypos + 'px');
+    Map.center_map($("#marker_char_current"));
+};
+
+// Replaces the exits at the bottom of the map with the area name
+Map.draw_exits_string = function () {
+    if (Map.cAreaName) {
+        var area_name = [];
+        var paren_index = Map.cAreaName.indexOf("(");
+        var comma_index = Map.cAreaName.indexOf(",");
+        if (paren_index !== -1) {
+            if (comma_index !== -1) {
+                area_name[0] = Map.cAreaName.slice(comma_index + 2, paren_index);
+                area_name[0] = area_name[0][0].toUpperCase() + area_name[0].slice(1);
+                area_name[1] = Map.cAreaName.slice(0, comma_index) + " ";
+            } else {
+                area_name[1] = Map.cAreaName.slice(0, paren_index);
+            }
+            area_name[2] = Map.cAreaName.slice(paren_index);
+        } else {
+            if (comma_index !== -1) {
+                area_name[0] = Map.cAreaName.slice(comma_index + 2);
+                area_name[0] = area_name[0][0].toUpperCase() + area_name[0].slice(1) + " ";
+                area_name[1] = Map.cAreaName.slice(0, comma_index);
+            } else {
+                area_name[0] = Map.cAreaName;
+            }
+        }
+        area_name = area_name.join("");
+        $("#map_room_exits").html(area_name);
+    }
+};

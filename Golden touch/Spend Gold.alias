@@ -1,0 +1,6 @@
+Alias text: ^spend +(\d+) +(?:gold +)?on +(.+)$
+Matching type: Regular expression
+Whole words only: yes
+Match case: yes
+
+golden_touch.spend_gold(args[1], args[2]);

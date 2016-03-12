@@ -1,0 +1,1 @@
+tracking_gmcp.on_gmcp(args.gmcp_method, args.gmcp_args);

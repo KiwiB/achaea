@@ -1,0 +1,6 @@
+Alias text: shop
+Matching type: Exact match
+Whole words only: yes
+Match case: yes
+
+golden_touch.toggle_shopping();

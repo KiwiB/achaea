@@ -1,0 +1,6 @@
+Alias text: ^gg$
+Matching type: Regular expression
+Whole words only: yes
+Match case: yes
+
+golden_touch.get_gold();
