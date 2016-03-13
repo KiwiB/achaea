@@ -121,7 +121,7 @@ Display notice patch
 Tracking gmcp
 
 ###SETUP
-Set pack_number below to the ID number of the container for your gold (make sure to keep it up to date if you change packs)
+Set pack_number in the package's onLoad to the ID number of the container for your gold (Ctrl+F "PACK NUMBER"). Make sure to keep it up to date if you change packs.
 
 ###ALIASES
 ```
