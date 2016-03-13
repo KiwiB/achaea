@@ -117,7 +117,7 @@ tracking_rift.check_rift(ITEM)
 Keeps your pack worn and your gold inside it and adds aliases for dealing with gold and shopping.
 
 ###REQUIRES
-Display notice patch
+Display notice patch  
 Tracking gmcp
 
 ###SETUP
