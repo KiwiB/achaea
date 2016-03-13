@@ -1,6 +1,0 @@
-Alias text: ^shop +for +([\w' ]+)$
-Matching type: Regular expression
-Whole words only: yes
-Match case: yes
-
-golden_touch.shop_for(args[1])
