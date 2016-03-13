@@ -127,6 +127,8 @@ Set pack_number below to the ID number of the container for your gold (make sure
 ```
 gg
     Picks up gold off the ground (and automatically puts it in your pack).
+gold
+    Displays the current amount of tracked gold.
 shop for ITEM1 ITEM2...
     Automatically checks wares for ITEM1, ITEM2, etc. when you enter a shop.
 shop
@@ -141,12 +143,25 @@ track gold
 
 ###API
 ```
+golden_touch.check_tracked_gold()
+    Displays the current amount of tracked gold.
 golden_touch.get_gold()
+    Picks up gold off the ground (and automatically puts it in your pack).
 golden_touch.shop_for(ITEMS)
+    Automatically checks wares for ITEM1, ITEM2, etc. when you enter a shop.
     NOTE: ITEMS is a string of items separated by spaces
+    Example of shopping for a vial and a pipe:
+        golden_touch.shop_for("vial pipe);
 golden_touch.spend_gold(AMOUNT, ACTION)
+    Gets AMOUNT gold from your pack and does ACTION (then automatically puts remaining gold in your pack).
+    NOTE: If you're too lazy to look at the exact price, just make sure AMOUNT is larger than what what is needed for ACTION. Any unspent gold will automatically be put back in your pack.
+    Example of getting 200 gold and requesting a letter:
+        golden_touch.spend_gold(200, "request letter");
 golden_touch.toggle_shopping()
+    Toggles shopping on and off.
 golden_touch.track_gold()
+    Toggles keeping a running total of gold picked up off the ground.
+    NOTE: Toggling resets the total.
 ```
 
 <a name="numpadmovement"></a>
