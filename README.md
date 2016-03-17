@@ -9,6 +9,7 @@ To download any of the packages, go to the the Releases section above or click [
 * Some of the packages rely on each other. Make sure to check the REQUIRES section for any package you install. The required packages must appear in the same order in Nexus that they do in the list (you can reorder packages in Nexus by grabbing the dots on the left side of the package name in Reflex Packages and dragging).
 * If you follow the package ordering in the table of contents below, there should be no conflicts.
 * Some of the scripts require minimal configuration. Make sure to check the SETUP section for any script you install.
+* After installing any of these scripts, save and restart Nexus to get them to start working.
 
 ##Packages
 |                 Package Name                | Description                                                                                       |
@@ -167,6 +168,9 @@ golden_touch.track_gold()
 <a name="numpadmovement"></a>
 ##Numpad Movement
 Keybinds for numpad movement.
+
+###SETUP
+Delete the existing Numpad movement package that Nexus automatically installs. Then add this one, make sure the box on it is checked to enable it, save your client, and restart.
 
 ###KEYBINDS
 ```
