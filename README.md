@@ -35,7 +35,7 @@ Changes player marker from flag to room outline and replaces exit text with area
 ##Display notice patch
 Adds support for multi-chunk display notices.
 
-###API
+####API
 ```
 display_notice(TEXT)  
     Displays TEXT.  
@@ -70,7 +70,7 @@ display_notice(TEXT, FG_COLOR, BG_COLOR, TEXT2, FG_COLOR2, BG_COLOR2...)
 ##Tracking gmcp
 Provides an event infrastructure for GMCP messages.
 
-###API
+####API
 ```
 tracking_gmcp.subscribe(GMCP_METHOD, MY_FUNCTION)
     Adds an event listener that calls MY_FUNCTION (passing it gmcp_args) whenever a gmcp message of type GMCP_METHOD (i.e., "Char.Vitals") is received.
@@ -87,10 +87,10 @@ tracking_gmcp.subscribe(GMCP_METHOD, MY_FUNCTION)
 ##Tracking Defences
 Tracks player defences.
 
-###REQUIRES
+####REQUIRES
 Tracking gmcp
 
-###API
+####API
 ```
 tracking_defences.check_defence(DEFENCE)
     Returns: true if the player has DEFENCE, otherwise false
@@ -102,10 +102,10 @@ tracking_defences.check_defence(DEFENCE)
 ##Tracking rift
 Tracks the contents of the rift.
 
-###REQUIRES
+####REQUIRES
 Tracking gmcp
 
-###API
+####API
 ```
 tracking_rift.check_rift(ITEM)
     Returns: amount of ITEM in player's rift
@@ -117,14 +117,14 @@ tracking_rift.check_rift(ITEM)
 ##Golden Touch
 Keeps your pack worn and your gold inside it, picks up gold dropped by your kills, and adds aliases for dealing with gold and shopping.
 
-###REQUIRES
+####REQUIRES
 Display notice patch  
 Tracking gmcp
 
-###SETUP
+####SETUP
 Set pack_number in the package's onLoad to the ID number of the container for your gold (Ctrl+F "PACK NUMBER"). Make sure to keep it up to date if you change packs.
 
-###ALIASES
+####ALIASES
 ```
 gg
     Picks up gold off the ground (and automatically puts it in your pack).
@@ -146,7 +146,7 @@ track gold
     NOTE: Toggling resets the total.
 ```
 
-###API
+####API
 ```
 golden_touch.check_tracked_gold()
     Displays the current amount of tracked gold.
@@ -179,10 +179,10 @@ golden_touch.track_gold()
 ##Numpad Movement
 Keybinds for numpad movement.
 
-###SETUP
+####SETUP
 Delete the existing Numpad movement package that Nexus automatically installs. Then add this one, make sure the box on it is checked to enable it, save your client, and restart.
 
-###KEYBINDS
+####KEYBINDS
 ```
 .
     Toggles use of numpad for movement.
@@ -214,7 +214,7 @@ Delete the existing Numpad movement package that Nexus automatically installs. T
     Sends "d".
 ```
 
-###API
+####API
 ```
 numpad_movement.toggle_numpad_movement()
     Toggles use of numpad for movement.
