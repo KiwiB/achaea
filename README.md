@@ -20,7 +20,7 @@ To download any of the packages, go to the the Releases section above or click [
 | [Tracking gmcp](#trackinggmcp)              | Provides an event infrastructure for GMCP messages.                                               |
 | [Tracking defences](#trackingdefences)      | Tracks player defences.                                                                           |
 | [Tracking rift](#trackingrift)              | Tracks the contents of the rift.                                                                  |
-| [Golden touch](#goldentouch)                | Keeps your pack worn and your gold inside it and adds aliases for dealing with gold and shopping. |
+| [Golden touch](#goldentouch)                | Keeps your pack worn and your gold inside it, picks up gold dropped by your kills, and adds aliases for dealing with gold and shopping. |
 | [Numpad movement](#numpadmovement)          | Keybinds for numpad movement.                                                                     |
 
 <a name="disablesounds"></a>
@@ -115,7 +115,7 @@ tracking_rift.check_rift(ITEM)
 
 <a name="goldentouch"></a>
 ##Golden Touch
-Keeps your pack worn and your gold inside it and adds aliases for dealing with gold and shopping.
+Keeps your pack worn and your gold inside it, picks up gold dropped by your kills, and adds aliases for dealing with gold and shopping.
 
 ###REQUIRES
 Display notice patch  
