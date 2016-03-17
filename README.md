@@ -138,7 +138,7 @@ spend AMOUNT (gold) on ACTION
      Gets AMOUNT gold from your pack and does ACTION (then automatically puts remaining gold in your pack).
      NOTE: This isn't just for spending gold in shops! Use this for anything involving gold, like "spend 50 on give gold to Sarapis" or "spend 100 on drop gold"
      NOTE: If you're too lazy to look at the exact price, just make sure AMOUNT is larger than what what is needed for ACTION. Any unspent gold will automatically be put back in your pack.
- split gold with PERSON1 PERSON2 PERSON3...
+split gold with PERSON1 PERSON2 PERSON3...
      Toggles off gold tracking and splits the tracked gold between yourself, PERSON1, PERSON2, PERSON3, etc.
      NOTE: If you don't want to include yourself, split the gold with one less person and then give it to them (using the spend alias).
 track gold
