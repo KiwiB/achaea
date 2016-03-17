@@ -135,8 +135,12 @@ shop for ITEM1 ITEM2...
 shop
     Toggles shopping on and off.
 spend AMOUNT (gold) on ACTION
-    Gets AMOUNT gold from your pack and does ACTION (then automatically puts remaining gold in your pack).
-    NOTE: If you're too lazy to look at the exact price, just make sure AMOUNT is larger than what what is needed for ACTION. Any unspent gold will automatically be put back in your pack.
+     Gets AMOUNT gold from your pack and does ACTION (then automatically puts remaining gold in your pack).
+     NOTE: This isn't just for spending gold in shops! Use this for anything involving gold, like "spend 50 on give gold to Sarapis" or "spend 100 on drop gold"
+     NOTE: If you're too lazy to look at the exact price, just make sure AMOUNT is larger than what what is needed for ACTION. Any unspent gold will automatically be put back in your pack.
+ split gold with PERSON1 PERSON2 PERSON3...
+     Toggles off gold tracking and splits the tracked gold between yourself, PERSON1, PERSON2, PERSON3, etc.
+     NOTE: If you don't want to include yourself, split the gold with one less person and then give it to them (using the spend alias).
 track gold
     Toggles keeping a running total of gold picked up off the ground.
     NOTE: Toggling resets the total.
@@ -158,6 +162,12 @@ golden_touch.spend_gold(AMOUNT, ACTION)
     NOTE: If you're too lazy to look at the exact price, just make sure AMOUNT is larger than what what is needed for ACTION. Any unspent gold will automatically be put back in your pack.
     Example of getting 200 gold and requesting a letter:
         golden_touch.spend_gold(200, "request letter");
+golden_touch.split(AMOUNT, PERSON1, PERSON2, PERSON3...)
+     If AMOUNT, splits the tracked gold between yourself, PERSON1, PERSON2, PERSON3, etc. Toggles off tracking and uses tracked gold if AMOUNT is not specified.
+     Example of splitting 100 gold between yourself, Sarapis, and Tecton:
+         golden_touch.split_gold(500, "Sarapis", "Tecton");
+     Example of splitting tracked gold between yourself, Sarapis, and Tecton:
+         golden_touch.split_gold("Sarapis", "Clementius");
 golden_touch.toggle_shopping()
     Toggles shopping on and off.
 golden_touch.track_gold()
