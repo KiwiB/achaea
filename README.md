@@ -3,7 +3,7 @@ This is a collection of scripts for Achaea for use in the Nexus client.
 
 To download any of the packages, go to the the Releases section above or click [here](https://github.com/samueldcorbin/achaea/releases/latest).
 
-##Important notes
+## Important notes
 * The onLoad function in each package includes documentation on aliases and API in a comment at the top.
 * Several of these scripts rely on advanced JavaScript features that are not supported by older browsers. If something isn't working, make sure you're using the latest version of Chrome or Firefox
 * Some of the packages rely on each other. Make sure to check the REQUIRES section for any package you install. The required packages must appear in the same order in Nexus that they do in the list (you can reorder packages in Nexus by grabbing the dots on the left side of the package name in Reflex Packages and dragging).
@@ -99,7 +99,7 @@ tracking_defences.check_defence(DEFENCE)
 ```
 
 <a name="trackingrift"></a>
-##Tracking rift
+## Tracking rift
 Tracks the contents of the rift.
 
 #### REQUIRES
@@ -114,7 +114,7 @@ tracking_rift.check_rift(ITEM)
 ```
 
 <a name="goldentouch"></a>
-##Golden Touch
+## Golden Touch
 Keeps your pack worn and your gold inside it, picks up gold dropped by your kills, and adds aliases for dealing with gold and shopping.
 
 #### REQUIRES
